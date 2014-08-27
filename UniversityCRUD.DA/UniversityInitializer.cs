@@ -16,7 +16,7 @@ namespace UniversityCRUD.DA
                 new Student(){ Age = 20, EnrollmentDate = DateTime.Now, Name = "Basil Ivanov" },
                 new Student(){ Age = 18, EnrollmentDate = DateTime.Now, Name = "Boris Ivan" },
                 new Student(){ Age = 27, EnrollmentDate = DateTime.Now, Name = "Masha Ivanova" },
-                new Student(){ Age = 23, EnrollmentDate = DateTime.Now, Name = "Ilmars Tils" },
+                new Student(){ Age = 23, EnrollmentDate = DateTime.Now, Name = "Vitautas" },
                 new Student(){ Age = 21, EnrollmentDate = DateTime.Now, Name = "Ivan" }
             };
             studentList.ForEach(s => context.Students.Add(s));
