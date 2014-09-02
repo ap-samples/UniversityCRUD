@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201408272108344_InitialCreate.cs" />
+    <Compile Include="Migrations\201408272108344_InitialCreate.Designer.cs">
+      <DependentUpon>201408272108344_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UniversityContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniversityInitializer.cs" />
@@ -59,6 +64,11 @@
       <Project>{dfd08682-83ee-4155-9b44-064a3b1a04dc}</Project>
       <Name>UniversityCRUD.BO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201408272108344_InitialCreate.resx">
+      <DependentUpon>201408272108344_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
