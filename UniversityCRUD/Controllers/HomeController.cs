@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UniversityCRUD.BO;
+using UniversityCRUD.DA.Repositories;
 
 namespace UniversityCRUD.Controllers
 {
@@ -16,6 +18,8 @@ namespace UniversityCRUD.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+
+            List<Student> students = StudentsRepository.Instance.GetWhere(s => s.Age > 20);
 
             return View();
         }
