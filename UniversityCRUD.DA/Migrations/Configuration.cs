@@ -25,7 +25,7 @@ namespace UniversityCRUD.DA.Migrations
                 new Student(){ Age = 23, EnrollmentDate = DateTime.Now, Name = "Vytautas" },
                 new Student(){ Age = 21, EnrollmentDate = DateTime.Now, Name = "Ivan" }
             };
-            studentList.ForEach(s => context.Students.Add(s));
+            studentList.ForEach(s => context.Students.AddOrUpdate(s));
             context.SaveChanges();
 
             var courseList = new List<Course>()
@@ -34,7 +34,7 @@ namespace UniversityCRUD.DA.Migrations
                 new Course(){ Credits = 20, Title = "Advanced maths"},
                 new Course(){ Credits = 10, Title = "Physics"}
             };
-            courseList.ForEach(c => context.Courses.Add(c));
+            courseList.ForEach(c => context.Courses.AddOrUpdate(c));
             context.SaveChanges();
 
             var enrollments = new List<Enrollment>()
@@ -44,7 +44,7 @@ namespace UniversityCRUD.DA.Migrations
                 new Enrollment(){ Course = context.Courses.FirstOrDefault(c => c.Title=="Physics"), 
                     Student = context.Students.FirstOrDefault(s => s.Name == "Boris Ivan")}
             };
-            enrollments.ForEach(e => context.Enrollments.Add(e));
+            enrollments.ForEach(e => context.Enrollments.AddOrUpdate(e));
             context.SaveChanges();
         }
     }

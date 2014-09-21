@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\EnrollmentRepository.cs" />
     <Compile Include="Repositories\StudentsRepository.cs" />
     <Compile Include="UniversityContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

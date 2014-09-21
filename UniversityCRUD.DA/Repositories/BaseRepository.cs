@@ -34,6 +34,33 @@ namespace UniversityCRUD.DA.Repositories
             }
         }
 
+        public virtual void Add(T item)
+        {
+            using (var ctx = new UniversityContext())
+            {
+                ctx.Entry(item).State = EntityState.Added;
+                ctx.SaveChanges();
+            }
+        }
+
+        public virtual void Update(T item)
+        {
+            using (var ctx = new UniversityContext())
+            {
+                ctx.Entry(item).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        public virtual void Remove(T item)
+        {
+            using (var ctx = new UniversityContext())
+            {
+                ctx.Entry(item).State = EntityState.Deleted;
+                ctx.SaveChanges();
+            }
+        }
+
         public virtual IQueryable<T> IncludeNavigationProperties(IQueryable<T> dbQuery)
         {
             return dbQuery;

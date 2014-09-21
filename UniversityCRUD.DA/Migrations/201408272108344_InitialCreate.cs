@@ -37,7 +37,7 @@ namespace UniversityCRUD.DA.Migrations
                 c => new
                     {
                         ID = c.Guid(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 60),
                         Age = c.Int(nullable: false),
                         EnrollmentDate = c.DateTime(nullable: false),
                     })
