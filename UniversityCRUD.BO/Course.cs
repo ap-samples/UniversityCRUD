@@ -14,5 +14,7 @@ namespace UniversityCRUD.BO
 
 
         public ICollection<Enrollment> Enrollments { get; set; }
+
+        public ICollection<Professor> Teachers { get; set; }
     }
 }

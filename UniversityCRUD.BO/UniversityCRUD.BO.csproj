@@ -50,6 +50,7 @@
     <Compile Include="Course.cs" />
     <Compile Include="Enrollment.cs" />
     <Compile Include="Enums\Grade.cs" />
+    <Compile Include="Professor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
   </ItemGroup>

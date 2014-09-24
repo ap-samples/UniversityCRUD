@@ -43,14 +43,44 @@ namespace UniversityCRUD.DA.Migrations
                     })
                 .PrimaryKey(t => t.ID);
             
+            CreateTable(
+                "dbo.Professors",
+                c => new
+                    {
+                        ID = c.Guid(nullable: false, identity: true),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        ContactEmail = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.ProfessorCourses",
+                c => new
+                    {
+                        Professor_ID = c.Guid(nullable: false),
+                        Course_ID = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Professor_ID, t.Course_ID })
+                .ForeignKey("dbo.Professors", t => t.Professor_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Courses", t => t.Course_ID, cascadeDelete: true)
+                .Index(t => t.Professor_ID)
+                .Index(t => t.Course_ID);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.ProfessorCourses", "Course_ID", "dbo.Courses");
+            DropForeignKey("dbo.ProfessorCourses", "Professor_ID", "dbo.Professors");
             DropForeignKey("dbo.Enrollments", "CourseID", "dbo.Courses");
             DropForeignKey("dbo.Enrollments", "StudentID", "dbo.Students");
+            DropIndex("dbo.ProfessorCourses", new[] { "Course_ID" });
+            DropIndex("dbo.ProfessorCourses", new[] { "Professor_ID" });
             DropIndex("dbo.Enrollments", new[] { "StudentID" });
             DropIndex("dbo.Enrollments", new[] { "CourseID" });
+            DropTable("dbo.ProfessorCourses");
+            DropTable("dbo.Professors");
             DropTable("dbo.Students");
             DropTable("dbo.Enrollments");
             DropTable("dbo.Courses");

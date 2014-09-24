@@ -15,6 +15,7 @@ namespace UniversityCRUD.DA
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Professor> Professors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -25,26 +25,38 @@ namespace UniversityCRUD.DA.Migrations
                 new Student(){ Age = 23, EnrollmentDate = DateTime.Now, Name = "Vytautas" },
                 new Student(){ Age = 21, EnrollmentDate = DateTime.Now, Name = "Ivan" }
             };
-            studentList.ForEach(s => context.Students.AddOrUpdate(s));
+            studentList.ForEach(s => context.Students.AddOrUpdate(h => h.Name, s));
             context.SaveChanges();
 
             var courseList = new List<Course>()
             {
                 new Course(){ Credits = 10, Title = "Maths"},
                 new Course(){ Credits = 20, Title = "Advanced maths"},
-                new Course(){ Credits = 10, Title = "Physics"}
+                new Course(){ Credits = 10, Title = "Physics"},
+                new Course(){ Credits = 10, Title = "Basic chemistry"},
+                new Course(){ Credits = 20, Title = "Advanced chemistry"}
             };
-            courseList.ForEach(c => context.Courses.AddOrUpdate(c));
+            courseList.ForEach(c => context.Courses.AddOrUpdate(course => course.Title, c));
             context.SaveChanges();
 
             var enrollments = new List<Enrollment>()
             {
-                new Enrollment(){ Course = context.Courses.FirstOrDefault(c => c.Title=="Maths"), Student = context.Students.FirstOrDefault()},
-                new Enrollment(){ Course = context.Courses.FirstOrDefault(c => c.Title=="Physics"), Student = context.Students.FirstOrDefault()},
-                new Enrollment(){ Course = context.Courses.FirstOrDefault(c => c.Title=="Physics"), 
-                    Student = context.Students.FirstOrDefault(s => s.Name == "Boris Ivan")}
+                new Enrollment(){ CourseID = context.Courses.FirstOrDefault(c => c.Title=="Maths").ID, StudentID = context.Students.FirstOrDefault().ID},
+                new Enrollment(){ CourseID = context.Courses.FirstOrDefault(c => c.Title=="Physics").ID, StudentID = context.Students.FirstOrDefault().ID},
+                new Enrollment(){ CourseID = context.Courses.FirstOrDefault(c => c.Title=="Physics").ID, 
+                    StudentID = context.Students.FirstOrDefault(s => s.Name == "Boris Ivan").ID}
             };
-            enrollments.ForEach(e => context.Enrollments.AddOrUpdate(e));
+            enrollments.ForEach(e =>
+                context.Enrollments.AddOrUpdate(enr => new { enr.CourseID, enr.StudentID }, e));
+            context.SaveChanges();
+
+            var professors = new List<Professor>()
+            {
+                new Professor(){ FirstName = "John", LastName="Jack Jameson", ContactEmail = "j.jameson@univ.edu",
+                PublicationCount = 20, 
+                CoursesTeached = new HashSet<Course>(){ context.Courses.FirstOrDefault(c => c.Title == "Basic chemistry") }}
+            };
+            professors.ForEach(p => context.Professors.AddOrUpdate(p));
             context.SaveChanges();
         }
     }
